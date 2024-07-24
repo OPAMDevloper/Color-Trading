@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <style>
+    body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    color: white;
+    padding: 14px 20px;
+}
+
+.navbar .brand {
+    float: left;
+    font-size: 20px;
+}
+
+.navbar a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.container {
+    padding: 20px;
+}
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+#addMoneyPopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px #000;
+    z-index: 2;
+}
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="brand">MyApp</div>
+    <div>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/profile">Profile</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div style="width: 80%; float: left;">
+      
+
+      <h3>Play Color Trading Game</h3>
+      <form action="/play-game" method="POST">
+        <label for="color">Choose a color:</label>
+        <select name="color" required>
+          <option value="red">Red</option>
+          <option value="black">Black</option>
+          <option value="green">Green</option>
+        </select>
+        <input type="number" name="betAmount" placeholder="Bet Amount" required>
+        <button type="submit">Play</button>
+      </form>
+    </div>
+
+    <div style="width: 20%; float: right;">
+      <h3>Wallet</h3>
+      <p>Current Balance: Rs. <%= balance %></p>
+      <button onclick="showPopup()">Add Money</button>
+    </div>
+  </div>
+
+  <div id="overlay"></div>
+
+  <div id="addMoneyPopup">
+    <form action="/add-money" method="POST">
+      <input type="number" name="amount" placeholder="Amount" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Add Money</button>
+      <button type="button" onclick="hidePopup()">Cancel</button>
+    </form>
+  </div>
+
+  <script>
+    function showPopup() {
+      document.getElementById('addMoneyPopup').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+    }
+
+    function hidePopup() {
+      document.getElementById('addMoneyPopup').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

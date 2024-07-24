@@ -1,0 +1,41 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(#00ffea, #6c6cdd);
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-header {
+  border-bottom: none;
+  padding: 1rem 2rem;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #538de0;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #4173b2;
+}
