@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Color Trading Game</title>
+    <style>
+        .color-boxes {
+            display: flex;
+            gap: 10px;
+        }
+        .color-box {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #000;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+        .color-box.red { background-color: red; }
+        .color-box.black { background-color: black; }
+        .color-box.green { background-color: green; }
+        .selected {
+            border: 2px solid yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="width: 80%; float: left;">
+            <h3>Play Color Trading Game</h3>
+            <form action="/play-game/playgame" method="POST" id="game-form">
+                <label for="color">Choose a color:</label>
+                <div class="color-boxes">
+                    <div class="color-box red" data-color="red"></div>
+                    <div class="color-box black" data-color="black"></div>
+                    <div class="color-box green" data-color="green"></div>
+                </div>
+                <input type="hidden" name="color" id="selected-color" required>
+                <input type="number" name="betAmount" placeholder="Bet Amount" required>
+                <button type="submit">Play</button>
+            </form>
+        </div>
+
+        <div style="width: 20%; float: right;">
+            <h3>Wallet</h3>
+            <p>Current Balance: Rs. <%= balance %></p>
+            <button onclick="showPopup()">Add Money</button>
+        </div>
+    </div>
+
+    <div id="overlay"></div>
+
+    <script>
+        // JavaScript for handling color selection
+        document.querySelectorAll('.color-box').forEach(box => {
+            box.addEventListener('click', function() {
+                document.querySelectorAll('.color-box').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+                document.getElementById('selected-color').value = this.dataset.color;
+            });
+        });
+    </script>
+</body>
+</html>

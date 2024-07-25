@@ -31,7 +31,7 @@ router.get('/logout', (req, res) => {
     }
     
     // Redirect to login page or home page
-    res.redirect('/login');
+    res.redirect('/');
   });
 });
 
@@ -48,12 +48,11 @@ router.post('/register', async (req, res) => {
     await newUser.save();
     const newWallet = new Wallet({ username });
     await newWallet.save();
-    res.redirect('/login');
+    res.redirect('/');
   } catch (err) {
     res.redirect('/register');
   }
 });
-
 
 // Dashboard
 router.get('/dashboard', async (req, res) => {
@@ -79,5 +78,7 @@ router.post('/add-money', async (req, res) => {
     res.redirect('/dashboard');
   }
 });
+
+
 
 module.exports = router;

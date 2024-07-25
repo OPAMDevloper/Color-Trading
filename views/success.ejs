@@ -1,0 +1,130 @@
+<center>
+    <table border="1">
+        <tr>
+            <td><label for="mid">Mid :</label></td>
+            <td><%= response?.mid %></td>
+        </tr>
+        <tr>
+            <td><label for="orderNo">Order No. :</label></td>
+            <td><%= response?.orderNo %></td>
+        </tr>
+        <tr>
+            <td><label for="txnRefNo">Transaction Ref. No. :</label></td>
+            <td><%= response?.txnRefNo %></td>
+        </tr>
+        <tr>
+            <td><label for="amount">Total Amount :</label></td>
+            <td><%= response?.amount %></td>
+        </tr>
+        <tr>
+            <td><label for="currency">Currency Name :</label></td>
+            <td><%= response?.currency %></td>
+        </tr>
+        <tr>
+            <td><label for="txnReqType">Transaction Req. Type :</label></td>
+            <td><%= response?.txnReqType %></td>
+        </tr>
+        <tr>
+            <td><label for="undefinedField1">Undefined Field 1 :</label></td>
+            <td><%= response?.undefinedField1 %></td>
+        </tr>
+        <tr>
+            <td><label for="undefinedField2">Undefined Field 2 :</label></td>
+            <td><%= response?.undefinedField2 %></td>
+        </tr>
+        <tr>
+            <td><label for="undefinedField3">Undefined Field 3 :</label></td>
+            <td><%= response?.undefinedField3 %></td>
+        </tr>
+        <tr>
+            <td><label for="undefinedField4">Undefined Field 4 :</label></td>
+            <td><%= response?.undefinedField4 %></td>
+        </tr>
+        <tr>
+            <td><label for="undefinedField5">Undefined Field 5 :</label></td>
+            <td><%= response?.undefinedField5 %></td>
+        </tr>
+        <tr>
+            <td><label for="undefinedField6">Undefined Field 6 :</label></td>
+            <td><%= response?.undefinedField6 %></td>
+        </tr>
+        <tr>
+            <td><label for="undefinedField7">Undefined Field 7 :</label></td>
+            <td><%= response?.undefinedField7 %></td>
+        </tr>
+        <tr>
+            <td><label for="undefinedField8">Undefined Field 8 :</label></td>
+            <td><%= response?.undefinedField8 %></td>
+        </tr>
+        <tr>
+            <td><label for="undefinedField9">Undefined Field 9 :</label></td>
+            <td><%= response?.undefinedField9 %></td>
+        </tr>
+        <tr>
+            <td><label for="undefinedField10">Undefined Field 10 :</label></td>
+            <td><%= response?.undefinedField10 %></td>
+        </tr>
+        <tr>
+            <td><label for="emailId">Email Id. :</label></td>
+            <td><%= response?.emailId %></td>
+        </tr>
+        <tr>
+            <td><label for="mobileNo">Mobile No. :</label></td>
+            <td><%= response?.mobileNo %></td>
+        </tr>
+        <tr>
+            <td><label for="address">Address :</label></td>
+            <td><%= response?.address %></td>
+        </tr>
+        <tr>
+            <td><label for="city">City :</label></td>
+            <td><%= response?.city %></td>
+        </tr>
+        <tr>
+            <td><label for="state">State :</label></td>
+            <td><%= response?.state %></td>
+        </tr>
+        <tr>
+            <td><label for="pincode">Pincode :</label></td>
+            <td><%= response?.pincode %></td>
+        </tr>
+        <tr>
+            <td><label for="respCode">Response Code :</label></td>
+            <td><%= response?.respCode %></td>
+        </tr>
+        <tr>
+            <td><label for="respMessage">Response Message :</label></td>
+            <td><%= response?.respMessage %></td>
+        </tr>
+        <tr>
+            <td><label for="payAmount">Pay Amount :</label></td>
+            <td><%= response?.payAmount %></td>
+        </tr>
+        <tr>
+            <td><label for="txnRespDate">Transaction Response Date :</label></td>
+            <td><%= response?.txnRespDate %></td>
+        </tr>
+        <tr>
+            <td><label for="upiString">UPI String :</label></td>
+            <td id="upiString"><%= response?.upiString %></td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align:center;padding:5px"><input type="submit" value="Pay Now" id="paynow" style="padding:6px;width:100%;background:#044e78;color:white;cursor:pointer" /></td>
+      </tr>
+    </table>
+  </center>
+  
+  <!-- Auto-Submit for UPI Intent -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  
+  <script>
+      $( document ).ready(function() {
+          var upiStr = $("#upiString").text();
+          $('#paynow').click(function(){
+              if(upiStr !== 'null'){
+              location.href = upiStr;
+              }
+          })
+      });
+  </script>
+  

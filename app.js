@@ -25,36 +25,10 @@ app.use(session({
 
 // Routes
 app.use('/', require('./routes/auth'));
+app.use('/payment',require('./routes/payment'))
+app.use('/play-game',require('./routes/playgame'))
 
 
-app.post('/play-game', async (req, res) => {
-  const username = 'Yash'; // Replace with session data in real implementation
-  const color = req.body.color;
-  const betAmount = parseInt(req.body.betAmount);
-
-  try {
-    const user = await Wallet.findOne({ username: username });
-    console.log(user);
-    if (user && user.balance >= betAmount) {
-      user.balance -= betAmount;
-      const colors = ['red', 'black', 'green'];
-      const randomColor = colors[Math.floor(Math.random() * colors.length)];
-      let winnings = 0;
-
-      if (color === randomColor) {
-        winnings = color === 'green' ? betAmount * 10 : betAmount * 2;
-      }
-
-      user.balance += winnings;
-      await user.save();
-      res.render('result', { randomColor, winnings });
-    } else {
-      res.status(400).send('Insufficient balance or user not found');
-    }
-  } catch (error) {
-    res.status(500).send('Internal Server Error');
-  }
-});
 
 // Start the server
 const PORT = process.env.PORT || 3000;
