@@ -78,7 +78,7 @@ router.post("/request", async (req, res) => {
       wallet.balance += parseFloat(money);
       await wallet.save();
       
-      res.render("dashboard", { response: JSON.parse(response) });
+      res.render("dashboard",  { username: req.session.user.username, balance: wallet.balance });
     }
   }
   
