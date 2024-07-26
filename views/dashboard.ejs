@@ -1,48 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-  <style>
-    body, html {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
-
-.navbar {
-    background-color: #333;
-    overflow: hidden;
-    color: white;
-    padding: 14px 20px;
-}
-
-.navbar .brand {
-    float: left;
-    font-size: 20px;
-}
-
-.navbar a {
-    color: white;
-    padding: 14px 20px;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.container {
-    padding: 20px;
-}
-
-#overlay {
-    display: none;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lottery</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/index.css">
+    <style>
+      #overlay {
     position: fixed;
-    top: 0;
-    left: 0;
+    display: none;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
 
 #addMoneyPopup {
@@ -51,150 +41,173 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: white;
+    background-color: white;
     padding: 20px;
-    box-shadow: 0px 0px 10px #000;
-    z-index: 2;
+    border-radius: 5px;
+    z-index: 1000;
+    width: 80%;
+    max-width: 600px;
 }
-
-  </style>
+    </style>
 </head>
+
 <body>
-  <!-- Navbar -->
-  <div class="navbar">
-    <div class="brand">MyApp</div>
-    <div>
-      <a href="/dashboard">Dashboard</a>
-      <a href="/profile">Profile</a>
-      <a href="/logout">Logout</a>
-    </div>
-  </div>
+    <div class="container">
+        <header class="header">
+            <div>
+                <img src="/fire_win_4-removebg-preview.png" width="50px" height="50px" alt="" />
+            </div>
+            <div>
+                <% if (typeof username !== 'undefined') { %>
+                    <span class="username ml-2"><%= username %></span>
+                    <a href="/logout" style="color: black;" class="login-link ml-2">Logout</a>
+                <% } else { %>
+                    <span class="username ml-2">Guest</span> <!-- Default text if user is not defined -->
+                    <a href="/login" style="color: black;" class="login-link ml-2">Login</a>
+                <% } %>
+                <img class="icons"
+                    src="https://static.vecteezy.com/system/resources/previews/000/512/317/non_2x/vector-wallet-glyph-black-icon.jpg" />
+                <img class="icons"
+                    src="https://www.shutterstock.com/image-vector/download-icon-vector-illustration-on-600nw-1724759407.jpg" />
+            </div>
+        </header>
+        <main class="main-content">
+            <h3>Play Color Trading Game</h3>
+           
 
-  <div class="container">
-    <div style="width: 80%; float: left;">
-      
-
-      <h3>Play Color Trading Game</h3>
-      <button onclick="redirectTo('/play-game/')">Play Game</button>
-
-    <div style="width: 20%; float: right;">
-      <h3>Wallet</h3>
-      <p>Username: <%= username %></p>
-      <p>Current Balance: Rs. <%= balance %></p>
-      <button onclick="showPopup()">Add Money</button>
-    </div>
-  </div>
-
-  <div id="overlay"></div>
-
-  <div id="addMoneyPopup">
-    <center>
-      <form name="payment_form" id="payment_form" method="post" action="/payment/request">
-        <caption> <h3>Transaction Request</h3> </caption>
-        <table border="1">
-          <tr>
-            <td><label for="mid"> Merchant ID </label></td>
-            <td><input type="text" name="mid" value="900000000000026" /></td>
-          </tr>
-          <tr>
-            <td><label for="secretKey"> Secret Key </label></td>
-            <td><input type="text" name="secretKey" value="scr2dHNWS5QYjb07vVmVOu9VGG3JhG1dPP5" /></td>
-          </tr>
-          <tr>
-            <td><label for="saltKey"> Salt Key </label></td>
-            <td><input type="text" name="saltKey" value="salNeSAWnEOmCd3UiEBQozhWoUny5GIZg" /></td>
-          </tr>
-          <tr>
-            <td><label for="orderNo"> Order No. </label></td>
-            <td><input type="text" name="orderNo" value="ORD<%= Math.floor(1000000 + Math.random() * 9000000) %>" /></td>
-          </tr>
-          <tr>
-            <td><label for="amount"> Total Amount </label></td>
-            <td><input type="text" name="amount" value="10" /></td>
-          </tr>
-          <tr>
-            <td><label for="currency"> Currency Name</label></td>
-            <td><input type="text" name="currency" value="INR" /></td>
-          </tr>
-          <tr>
-            <td><label for="txnReqType"> txnReqType</label></td>
-            <td><input type="text" name="txnReqType" value="S" /></td>
-          </tr>
-    
-            <input type="hidden" name="undefinedField1" value="" />
-            <input type="hidden" name="undefinedField2" value="" />
-            <input type="hidden" name="undefinedField3" value="" />
-            <input type="hidden" name="undefinedField4" value="" />
-            <input type="hidden" name="undefinedField5" value="" />
-            <input type="hidden" name="undefinedField6" value="" />
-            <input type="hidden" name="undefinedField7" value="" />
-            <input type="hidden" name="undefinedField8" value="" />
-            <input type="hidden" name="undefinedField9" value="" />
-            <input type="hidden" name="undefinedField10" value="" />
+            <div style="">
             
-          <tr>
-            <td><label for="emailId"> Email Id.</label></td>
-            <td><input type="text" name="emailId" value="test@gmail.com" /></td>
-          </tr>
-          <tr>
-            <td><label for="mobileNo"> Mobile No. </label></td>
-            <td><input type="text" name="mobileNo" value="9876543210" /></td>
-          </tr>
-    
-            <input type="hidden" name="address" value="" />
-            <input type="hidden" name="city" value="" />
-            <input type="hidden" name="state" value="" />
-            <input type="hidden" name="pincode" value="" />
-    
-          <tr>
-            <td><label for="transactionMethod"> Transaction Method </label></td>
-            <td><input type="text" name="transactionMethod" value="UPI" /></td>
-          </tr>
-          
-            <input type="hidden" name="bankCode" value="" />
-            <input type="hidden" name="vpa" value="" />
-            <input type="hidden" name="cardNumber" value="" />
-            <input type="hidden" name="expiryDate" value="" />
-            <input type="hidden" name="cvv" value="" />
-    
-          <tr>
-            <td><label for="customerName"> Customer Name </label></td>
-            <td><input type="text" name="customerName" value="Graphite" /></td>
-          </tr>
-    
-            <input type="hidden" name="respUrl" value="" />
-    
-          <tr>
-            <td><label for="optional1"> UPI Type </label></td>
-            <td><input type="text" name="optional1" value="intent" /></td>
-          </tr>
-    
-          <tr>
-            <td colspan="2" style="text-align:center;padding:5px"><input type="submit" value="SUBMIT" style="padding:6px;width:100%;background:#044e78;color:white" /></td>
-          </tr>
-        </table>
-      </form>
-    </center>
-    
-  </div>
+                <p>Username: <%= username %></p>
+                <p>Current Balance: Rs. <%= balance %></p>
+                <button onclick="showPopup()"  style="background-color: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-size: 16px; cursor: pointer; transition: background-color 0.3s ease;">Add Money</button>
+            </div>
 
-  <script>
-    function showPopup() {
-      document.getElementById('addMoneyPopup').style.display = 'block';
-      document.getElementById('overlay').style.display = 'block';
-    }
+            <hr>
 
-    function hidePopup() {
-      document.getElementById('addMoneyPopup').style.display = 'none';
-      document.getElementById('overlay').style.display = 'none';
-    }
-  </script>
+            <button onclick="redirectTo('/play-game/')"
+        style="background-color: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-size: 16px; cursor: pointer; transition: background-color 0.3s ease;">
+    Play Game
+</button>
+
+        </main>
+
+        <div id="overlay"></div>
+
+        <div id="addMoneyPopup">
+            <center>
+                <form name="payment_form" id="payment_form" method="post" action="/payment/request">
+                    <caption>
+                        <h3>Transaction Request</h3>
+                    </caption>
+                    <table border="1">
+                        <tr>
+                            <td><label for="mid" hidden> Merchant ID </label></td>
+                            <td><input type="text" name="mid" value="900000000000026" hidden /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="secretKey" hidden> Secret Key </label></td>
+                            <td><input type="text" name="secretKey" value="scr2dHNWS5QYjb07vVmVOu9VGG3JhG1dPP5" hidden /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="saltKey"hidden> Salt Key </label></td>
+                            <td><input type="text" name="saltKey" value="salNeSAWnEOmCd3UiEBQozhWoUny5GIZg" hidden /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="orderNo"> Order No. </label></td>
+                            <td><input type="text" name="orderNo"
+                                    value="ORD<%= Math.floor(1000000 + Math.random() * 9000000) %>" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="amount"> Total Amount </label></td>
+                            <td><input type="text" name="amount" value="10" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="currency"> Currency Name</label></td>
+                            <td><input type="text" name="currency" value="INR" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="txnReqType"hidden> txnReqType</label></td>
+                            <td><input type="text" name="txnReqType" value="S" hidden /></td>
+                        </tr>
+
+                        <input type="hidden" name="undefinedField1" value="" />
+                        <input type="hidden" name="undefinedField2" value="" />
+                        <input type="hidden" name="undefinedField3" value="" />
+                        <input type="hidden" name="undefinedField4" value="" />
+                        <input type="hidden" name="undefinedField5" value="" />
+                        <input type="hidden" name="undefinedField6" value="" />
+                        <input type="hidden" name="undefinedField7" value="" />
+                        <input type="hidden" name="undefinedField8" value="" />
+                        <input type="hidden" name="undefinedField9" value="" />
+                        <input type="hidden" name="undefinedField10" value="" />
+
+                        <tr>
+                            <td><label for="emailId"> Email Id.</label></td>
+                            <td><input type="text" name="emailId" value="test@gmail.com" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="mobileNo"> Mobile No. </label></td>
+                            <td><input type="text" name="mobileNo" value="9876543210" /></td>
+                        </tr>
+
+                        <input type="hidden" name="address" value="" />
+                        <input type="hidden" name="city" value="" />
+                        <input type="hidden" name="state" value="" />
+                        <input type="hidden" name="pincode" value="" />
+
+                        <tr>
+                            <td><label for="transactionMethod"> Transaction Method </label></td>
+                            <td><input type="text" name="transactionMethod" value="UPI" /></td>
+                        </tr>
+
+                        <input type="hidden" name="bankCode" value="" />
+                        <input type="hidden" name="vpa" value="" />
+                        <input type="hidden" name="cardNumber" value="" />
+                        <input type="hidden" name="expiryDate" value="" />
+                        <input type="hidden" name="cvv" value="" />
+
+                        <tr>
+                            <td><label for="customerName"> Customer Name </label></td>
+                            <td><input type="text" name="customerName" value="Graphite" /></td>
+                        </tr>
+
+                        <input type="hidden" name="respUrl" value="" />
+
+                        <tr>
+                            <td><label for="optional1"> UPI Type </label></td>
+                            <td><input type="text" name="optional1" value="intent" /></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2" style="text-align:center;padding:5px">
+                                <input type="submit" value="SUBMIT" style="padding:6px;width:100%;background:#044e78;color:white" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </center>
+        </div>
+
+        <footer class="footer">
+            <nav class="nav">
+                <a class="nav-item" href="/color">Color Game</a>
+                <a class="nav-item" href="/number">Number Game</a>
+                <a class="nav-item" href="/dice">Dice Game</a>
+                <a class="nav-item" href="/ludo">Ludo</a>
+            </nav>
+        </footer>
+    </div>
+
+    <script>
+        function redirectTo(url) {
+            window.location.href = url;
+        }
+
+        function showPopup() {
+            document.getElementById("addMoneyPopup").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+    </script>
 </body>
+
 </html>
-
-
-<script>
-  function redirectTo(page) {
-      window.location.href = page;
-  }
-</script>

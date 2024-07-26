@@ -3,62 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Play Color Trading Game</title>
+    <title>Lottery</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/index.css">
     <style>
-        .color-boxes {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
             display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 500px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .balance-section {
+            background-color: #009688;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        .balance-section button {
+            margin: 10px 5px;
+            padding: 5px 10px;
+            border: none;
+            background-color: #ffffff;
+            color: #009688;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .balance-section button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .game-section {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .game-section .period {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .game-section .countdown {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .color-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .color-buttons button {
+            margin: 0 5px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .color-buttons .green {
+            background-color: green;
+        }
+
+        .color-buttons .violet {
+            background-color: violet;
+        }
+
+        .color-buttons .red {
+            background-color: red;
+        }
+
+        .number-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 10px;
         }
-        .color-box {
-            width: 50px;
-            height: 50px;
-            border: 2px solid #000;
+
+        .number-buttons button {
+            width: 60px;
+            height: 60px;
+            border: none;
+            border-radius: 5px;
+            background-color: #e0e0e0;
+            font-size: 18px;
             cursor: pointer;
-            box-shadow: 0 0 5px rgba(0,0,0,0.3);
         }
-        .color-box.red { background-color: red; }
-        .color-box.black { background-color: black; }
-        .color-box.green { background-color: green; }
-        .selected {
-            border: 2px solid yellow;
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .header .icons {
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .nav-item {
+            color: #009688;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-item:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div style="width: 80%; float: left;">
-            <h3>Play Color Trading Game</h3>
-            <form action="/play-game/playgame" method="POST" id="game-form">
-                <label for="color">Choose a color:</label>
-                <div class="color-boxes">
-                    <div class="color-box red" data-color="red"></div>
-                    <div class="color-box black" data-color="black"></div>
-                    <div class="color-box green" data-color="green"></div>
+        <header class="header">
+            <div>
+                <img src="/fire_win_4-removebg-preview.png" width="50px" height="50px" alt="" />
+            </div>
+            <div>
+                <% if (typeof username !== 'undefined') { %>
+                <span class="username ml-2"><%= username %></span>
+                <a href="/logout" style="color: black;" class="login-link ml-2">Logout</a>
+                <% } else { %>
+                <span class="username ml-2">Guest</span> <!-- Default text if user is not defined -->
+                <a href="/login" style="color: black;" class="login-link ml-2">Login</a>
+                <% } %>
+                <img class="icons" src="https://static.vecteezy.com/system/resources/previews/000/512/317/non_2x/vector-wallet-glyph-black-icon.jpg" />
+                <img class="icons" src="https://www.shutterstock.com/image-vector/download-icon-vector-illustration-on-600nw-1724759407.jpg" />
+            </div>
+        </header>
+        <main class="main-content">
+            <div class="balance-section">
+                <p>Available balance: ₹ <span id="balance"></span></p>
+                <button onclick="showPopup()">Recharge</button>
+                <button>Trend</button>
+            </div>
+
+            <div class="game-section">
+                <div class="period">Period: 20230610140</div>
+                <div class="countdown">0 : 2 : 4 : 4</div>
+
+                <div class="color-buttons">
+                    <button class="green" onclick="selectColor('green')">Join Green</button>
+                    <button class="violet" onclick="selectColor('violet')">Join Violet</button>
+                    <button class="red" onclick="selectColor('red')">Join Red</button>
                 </div>
-                <input type="hidden" name="color" id="selected-color" required>
-                <input type="number" name="betAmount" placeholder="Bet Amount" required>
-                <button type="submit">Play</button>
-            </form>
-        </div>
 
-        <div style="width: 20%; float: right;">
-            <h3>Wallet</h3>
-            <p>Current Balance: Rs. <%= balance %></p>
-            <button onclick="showPopup()">Add Money</button>
-        </div>
+                <div class="number-buttons">
+                    <button>0</button>
+                    <button>1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>4</button>
+                    <button>5</button>
+                    <button>6</button>
+                    <button>7</button>
+                    <button>8</button>
+                    <button>9</button>
+                </div>
+
+                <form action="/play-game/playgame" method="POST" id="game-form">
+                    <input type="hidden" name="color" id="selected-color" required>
+                    <input type="number" name="betAmount" placeholder="Bet Amount" required>
+                    <button type="submit">Place Bid</button>
+                </form>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <nav class="nav">
+                <a class="nav-item" href="/color">Color Game</a>
+                <a class="nav-item" href="/number">Number Game</a>
+                <a class="nav-item" href="/dice">Dice Game</a>
+                <a class="nav-item" href="/ludo">Ludo</a>
+            </nav>
+        </footer>
     </div>
-
-    <div id="overlay"></div>
 
     <script>
         // JavaScript for handling color selection
-        document.querySelectorAll('.color-box').forEach(box => {
-            box.addEventListener('click', function() {
-                document.querySelectorAll('.color-box').forEach(b => b.classList.remove('selected'));
-                this.classList.add('selected');
-                document.getElementById('selected-color').value = this.dataset.color;
-            });
-        });
+        function selectColor(color) {
+            document.getElementById('selected-color').value = color;
+        }
+
+        // Set the balance from the server-side variable
+        document.getElementById('balance').textContent = "<%= balance %>";
     </script>
 </body>
 </html>

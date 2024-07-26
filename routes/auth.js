@@ -4,8 +4,12 @@ const User = require('../models/User');
 const Wallet = require('../models/Wallet');
 const bcrypt = require('bcrypt');
 
-// Login
 router.get('/', (req, res) => {
+  res.render('index');
+});
+
+// Login
+router.get('/login', (req, res) => {
   res.render('login');
 });
 
@@ -16,7 +20,7 @@ router.post('/login', async (req, res) => {
 
   if (user && await bcrypt.compare(password, user.password)) {
     req.session.user = user;
-    res.redirect('/dashboard');
+    res.render('index',{username: req.session.user.username});
   } else {
     res.redirect('/login');
   }
@@ -48,7 +52,7 @@ router.post('/register', async (req, res) => {
     await newUser.save();
     const newWallet = new Wallet({ username });
     await newWallet.save();
-    res.redirect('/');
+    res.render('login');
   } catch (err) {
     res.redirect('/register');
   }

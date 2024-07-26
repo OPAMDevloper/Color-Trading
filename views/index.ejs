@@ -1,14 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-  <link rel="stylesheet" href="/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lottery</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/index.css">
 </head>
+
 <body>
-  <%- include('partials/navbar') %>
-  <h2>Welcome to Color Trading Application</h2>
-  <a href="/login">Login</a> | <a href="/register">Register</a>
+    <div class="container">
+        <header class="header">
+            <div>
+                <img src="/fire_win_4-removebg-preview.png" width="50px"
+                    height="50px" alt="" />
+            </div>
+            <div>
+              <% if (typeof username !== 'undefined') { %>
+                <span class="username ml-2"><%= username %></span>
+                <a href="/logout" style="color: black;" class="login-link ml-2">Logout</a>
+            <% } else { %>
+                <span class="username ml-2">Guest</span> <!-- Display default text if user is not defined -->
+                <a href="/login" style="color: black;" class="login-link ml-2">Login</a>
+            <% } %>
+                <img class="icons"
+                    src="https://static.vecteezy.com/system/resources/previews/000/512/317/non_2x/vector-wallet-glyph-black-icon.jpg" />
+                    
+                <img class="icons"
+                    src="https://www.shutterstock.com/image-vector/download-icon-vector-illustration-on-600nw-1724759407.jpg" />
+            </div>
+        </header>
+        <main class="main-content">
+            <div class="section-carousel">
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100 image"
+                                src="https://ossimg.goa999.vip/GoaGame/banner/Banner_20231112215017xjfe.png"
+                                alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100 image"
+                                src="https://ossimg.goa999.vip/GoaGame/banner/Banner_20231114200110vf3h.png"
+                                alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100 image"
+                                src="https://ossimg.goa999.vip/GoaGame/banner/Banner_20240407165650hyqw.png"
+                                alt="Third slide">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="annousment-container">
+                <div>
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
+                <div id="scroll-container">
+                    <div id="scroll-text">Thank for being the member of GOA GAMES platform, we provide many indust.<div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="details-button">Details</button>
+                </div>
+            </div>
+            <div class="game_menu">
+                <div class="menu_box1">
+                    <div class="menu-box-1 box-1">
+                        <img class="img-1" alt=""
+                            src="https://ossimg.goa999.vip/GoaGame/gamecategory/gamecategory_20240127134718aedk.png">
+                        <span>Popular</span>
+                    </div>
+                    <div class="menu-box-1 box-2">
+                        <img class="img-1" alt=""
+                            src="https://ossimg.goa999.vip/GoaGame/gamecategory/gamecategory_20240127134331wkt7.png">
+                        <span>Lottery</span>
+                    </div>
+                    <div class="menu-box-1 box-3">
+                        <img class="img-1" alt=""
+                            src="https://ossimg.goa999.vip/GoaGame/gamecategory/gamecategory_20240127160211wyu9.png">
+                        <span>Slots</span>
+                    </div>
+                </div>
+                <div class="menu_box2">
+                    <div class="menu-box-1">
+                        <img class="img-1" alt=""
+                            src="https://ossimg.goa999.vip/GoaGame/gamecategory/gamecategory_20240127171151ol6s.png">
+                        <span>Sports</span>
+                    </div>
+                    <div class="menu-box-1">
+                        <img class="img-1" alt=""
+                            src="https://ossimg.goa999.vip/GoaGame/gamecategory/gamecategory_20240127160544mw56.png">
+                        <span>Casino</span>
+                    </div>
+                    <div class="menu-box-1">
+                        <img class="img-1" alt=""
+                            src="https://ossimg.goa999.vip/GoaGame/gamecategory/gamecategory_20240127140618epu3.png">
+                        <span>Rummy</span>
+                    </div>
+                </div>
+                <div class="menu_box3">
+                    <div class="box3-a">
+                        <img class="img-1" alt=""
+                            src="https://ossimg.goa999.vip/GoaGame/gamecategory/gamecategory_20240306120644tfcu.png">
+                        <span>Fishing</span>
+                    </div>
+                    <div class="box3-b">
+                        <img alt="" class="img-1"
+                            src="https://ossimg.goa999.vip/GoaGame/gamecategory/gamecategory_2023071018441674yw.png">
+                        <span>Original</span>
+                    </div>
+                </div>
+            </div>
+            <div class="Platform-container">
+              <% if (typeof username !== 'undefined') { %>
+                <p class="platform-heading"><span class="hr-v"></span> Platform Recommendation</p>
+
+                <div class="platform">
+                    <div class="platform-img">
+                        <img class="plat-img" src="/download.jpeg" onclick="redirectToDashboard()" />
+                    </div>
+                    <script>
+                      function redirectToDashboard() {
+                          window.location.href = '/dashboard';
+                      }
+                      </script>
+                    <div class="platform-img">
+                        <img class="plat-img"
+                            src="https://ossimg.goa999.vip/GoaGame/gamelogo/EVO_Electronic/fivestar00000000.png" />
+                    </div>
+                    <div class="platform-img">
+                        <img class="plat-img"
+                            src="https://ossimg.goa999.vip/GoaGame/gamelogo/EVO_Electronic/reelsteal0000000.png" />
+                    </div>
+                </div>
+                <div class="platform">
+                    <div class="platform-img">
+                        <img class="plat-img"
+                            src="https://ossimg.goa999.vip/GoaGame/gamelogo/EVO_Electronic/risquemegaways00.png" />
+                    </div>
+                    <div class="platform-img">
+                        <img class="plat-img"
+                            src="https://ossimg.goa999.vip/GoaGame/gamelogo/EVO_Electronic/walkofshame00000.png" />
+                    </div>
+                    <div class="platform-img">
+                        <img class="plat-img" src="https://ossimg.goa999.vip/GoaGame/gamelogo/JDB/14025.png" />
+                    </div>
+                </div>
+                <% } else { %>
+                  <p class="platform-heading"><span class="hr-v"></span>Platform Recommendation Games</p>
+                   <small style="color: red;text-align: center;">Login To Play</small>
+                  <!-- Display default text if user is not defined -->
+                 
+              <% } %>
+            </div>
+            <div class="winning-info-container">
+                <p class="platform-heading"><span class="hr-v"></span>Winning Information</p>
+                <div class="winning-info">
+                    <div>
+                        <img class="winning-info-img-1" src="https://goagame.com/assets/png/18-52955242.png" />
+                    </div>
+                    <div class="winning-mem">
+                        <p>Meme*****20434</p>
+                    </div>
+                    <div class="winning-info-img-2-con">
+                        <img class="winning-info-img-2"
+                            src="https://ossimg.goa999.vip/GoaGame/vendorlogo/vendorlogo_20230710184633b9w1.png" />
+                    </div>
+                    <div class="winning-info-para">
+                        <p class="winning-amt">Receive 20.00 <br>winning amount</p>
+                    </div>
+                </div>
+                <div class="winning-info">
+                    <div>
+                        <img class="winning-info-img-1" src="https://goagame.com/assets/png/18-52955242.png" />
+                    </div>
+                    <div class="winning-mem">
+                        <p>Meme*****20434</p>
+                    </div>
+                    <div class="winning-info-img-2-con">
+                        <img class="winning-info-img-2"
+                            src="https://ossimg.goa999.vip/GoaGame/vendorlogo/vendorlogo_20230710184633b9w1.png" />
+                    </div>
+                    <div class="winning-info-para">
+                        <p class="winning-amt">Receive 20.00<br>winning amount</p>
+                    </div>
+                </div>
+                <div class="winning-info">
+                    <div>
+                        <img class="winning-info-img-1" src="https://goagame.com/assets/png/18-52955242.png" />
+                    </div>
+                    <div class="winning-mem">
+                        <p>Meme*****20434</p>
+                    </div>
+                    <div class="winning-info-img-2-con">
+                        <img class="winning-info-img-2"
+                            src="https://ossimg.goa999.vip/GoaGame/vendorlogo/vendorlogo_20230710184633b9w1.png" />
+                    </div>
+                    <div class="winning-info-para">
+                        <p class="winning-amt">Receive 20.00<br>winning amount</p>
+                    </div>
+                </div>
+                <div class="winning-info">
+                    <div>
+                        <img class="winning-info-img-1" src="https://goagame.com/assets/png/18-52955242.png" />
+                    </div>
+                    <div class="winning-mem">
+                        <p>Meme*****20434</p>
+                    </div>
+                    <div class="winning-info-img-2-con">
+                        <img class="winning-info-img-2"
+                            src="https://ossimg.goa999.vip/GoaGame/vendorlogo/vendorlogo_20230710184633b9w1.png" />
+                    </div>
+                    <div class="winning-info-para">
+                        <p class="winning-amt">Receive 20.00<br>winning amount</p>
+                    </div>
+                </div>
+                <div class="winning-info">
+                    <div>
+                        <img class="winning-info-img-1" src="https://goagame.com/assets/png/18-52955242.png" />
+                    </div>
+                    <div class="winning-mem">
+                        <p>Meme*****20434</p>
+                    </div>
+                    <div class="winning-info-img-2-con">
+                        <img class="winning-info-img-2"
+                            src="https://ossimg.goa999.vip/GoaGame/vendorlogo/vendorlogo_20230710184633b9w1.png" />
+                    </div>
+                    <div class="winning-info-para">
+                        <p class="winning-amt">Receive 20.00 <br> winning amount</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container-earning">
+                <p class="platform-heading"><span class="hr-v"></span>Today's Earning Chart</p>
+                <div class="top-earners top-row">
+                    <div class="earner second">
+                        <img src="https://goagame.com/assets/png/15-80f41fc6.png" alt="Earner 2">
+                        <h5>mem</h5>
+                        <p>$90,000</p>
+                    </div>
+                    <div class="earner first">
+                        <img src="https://goagame.com/assets/png/15-80f41fc6.png" alt="Earner 1">
+                        <h3>mem</h3>
+                        <p>$100,000</p>
+                    </div>
+                    <div class="earner third">
+                        <img src="https://goagame.com/assets/png/15-80f41fc6.png" alt="Earner 3">
+                        <h6>mem</h6>
+                        <p>$85,000</p>
+                    </div>
+                </div>
+                <div class="bottom-row">
+                    <div class="earner fourth">
+                        <img src="https://goagame.com/assets/png/15-80f41fc6.png" alt="Earner 4">
+                        <h6>mem</h6>
+                        <p>$80,000</p>
+                    </div>
+                    <div class="earner fifth">
+                        <img src="https://goagame.com/assets/png/15-80f41fc6.png" alt="Earner 5">
+                        <h6>mem</h6>
+                        <p>$75,000</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            <nav class="nav">
+                <a href="#" class="nav-item">Home</a>
+                <a href="#" class="nav-item">Activity</a>
+                <a href="#" class="nav-item">Promotion</a>
+                <a href="#" class="nav-item">Wallet</a>
+                <a href="#" class="nav-item">Account</a>
+            </nav>
+        </footer>
+    </div>
 </body>
+
 </html>
