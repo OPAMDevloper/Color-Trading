@@ -22,7 +22,7 @@ router.post('/playgame', async (req, res) => {
       const user = await Wallet.findOne({ username: username });
       if (user && user.balance >= betAmount) {
           user.balance -= betAmount;
-          const colors = ['red', 'black', 'green'];
+          const colors = ['red', 'violet', 'green'];
           const randomColor = colors[Math.floor(Math.random() * colors.length)];
           let winnings = 0;
 
@@ -33,12 +33,10 @@ router.post('/playgame', async (req, res) => {
           user.balance += winnings;
           await user.save();
 
-          res.json({ 
-              success: true, 
-              randomColor, 
-              winnings, 
-              newBalance: user.balance 
-          });
+          res.render('playgame',{success: true, 
+            randomColor, 
+            winnings, 
+            balance: user.balance })
       } else {
           res.json({ success: false, message: 'Insufficient balance or user not found' });
       }

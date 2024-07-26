@@ -206,7 +206,15 @@
                     <button type="submit">Place Bid</button>
                 </form>
             </div>
+            <% if (typeof success !== 'undefined') { %>
+                <h1 style="color: #009688;">Result</h1><br>
+             
+                <h3>Color Drawn :- <%= randomColor %></h3>
+                <h3>Winning :- <%= winnings %></h3>
+                <% }  %>
         </main>
+
+          
 
         <footer class="footer">
             <nav class="nav">

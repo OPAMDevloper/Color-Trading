@@ -13,6 +13,7 @@ router.get('/dashboard', async (req, res) => {
   });
 
 router.post("/request", async (req, res) => {
+  const uss=req.session.user.username;
     const sp = new PayMor();
     const money = req?.body?.amount || ""
     const response = await sp.initiatePayment({
@@ -49,13 +50,13 @@ router.post("/request", async (req, res) => {
     if (response?.error) {
       res.send(response);
     } else {
-      respHandler(response, res,money);
+      respHandler(response, res,money,uss);
     }
   });
   
-  async function respHandler(jsonData, res, money) {
+  async function respHandler(jsonData, res, money,uss) {
     const responseData = jsonData;
-  
+   
     if (responseData?.respCode == 1) {
       res.send(responseData?.data?.ResponseMsg);
     } else {
@@ -78,7 +79,7 @@ router.post("/request", async (req, res) => {
       wallet.balance += parseFloat(money);
       await wallet.save();
       
-      res.render("dashboard",  { username: req.session.user.username, balance: wallet.balance });
+      res.render("dashboard",  { username: uss, balance: wallet.balance });
     }
   }
   
